@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import { useState } from 'react'
+import { useMount } from 'react-use'
+import MapContainer from './components/MapContainer';
 import './App.css';
+import Axios from 'axios'
+
+const api_key = process.env.REACT_APP_NREL_KEY
 
 function App() {
+  const [lat, setLat] = useState("")
+  const [lng, setLng] = useState("")
+  const [list, setList] = useState([])
+  useMount(() => {
+    navigator.geolocation.getCurrentPosition((position) => {
+      setLat(position.coords.latitude)
+      setLng(position.coords.longitude)
+      Axios.get('https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json', {
+        params: {
+          api_key: api_key,
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          radius: 60.0,
+          fuel_type: 'E85',
+          access: 'public'
+        }
+      }).then((res) => {
+        setList(res.data['fuel_stations'])
+      })
+    })
+
+  })
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MapContainer lat={lat} lng={lng} list={list}/>
     </div>
   );
 }
