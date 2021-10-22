@@ -28,7 +28,7 @@ function MapContainer(props) {
 
     return (
         <div>
-            {props.lat &&
+            {props.lat && props.lng ?
                 <Map
                     google={props.google}
                     onClick={onMapClick}
@@ -55,7 +55,7 @@ function MapContainer(props) {
                         <h1>{selectedPlace.name}</h1>
                         <h3>{selectedPlace.address}</h3>
                     </InfoWindow>
-                </Map>
+                </Map>: null
             }
         </div>
     )
