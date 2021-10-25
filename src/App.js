@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useMount } from 'react-use'
 import MapContainer from './components/MapContainer';
-import './App.css';
+import Dropdown from 'react-bootstrap/Dropdown';
 import Axios from 'axios'
 
 const api_key = process.env.REACT_APP_NREL_KEY
@@ -32,7 +32,19 @@ function App() {
 
   return (
     <div className="App">
-      <MapContainer lat={lat} lng={lng} list={list}/>
+      <Dropdown>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          RADIUS
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">15 miles</Dropdown.Item>
+          <Dropdown.Item href="#/action-2">30 miles</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">45 miles</Dropdown.Item>
+          <Dropdown.Item href="#/action-3">60 miles</Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
+      <MapContainer lat={lat} lng={lng} list={list} />
     </div>
   );
 }
