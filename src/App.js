@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useMount } from 'react-use'
 import MapContainer from './components/MapContainer';
+import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Axios from 'axios'
 
@@ -14,38 +15,40 @@ function App() {
     navigator.geolocation.getCurrentPosition((position) => {
       setLat(position.coords.latitude)
       setLng(position.coords.longitude)
-      Axios.get('https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json', {
-        params: {
-          api_key: api_key,
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-          radius: 60.0,
-          fuel_type: 'E85',
-          access: 'public'
-        }
-      }).then((res) => {
-        setList(res.data['fuel_stations'])
-      })
     })
-
   })
+  const fetchList = (e) => {
+    Axios.get('https://developer.nrel.gov/api/alt-fuel-stations/v1/nearest.json', {
+      params: {
+        api_key: api_key,
+        latitude: lat,
+        longitude: lng,
+        radius: e,
+        fuel_type: 'E85',
+        access: 'public'
+      }
+    }).then((res) => {
+      setList(res.data['fuel_stations'])
+    })
+  }
+
 
   return (
     <div className="App">
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          RADIUS
-        </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">15 miles</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">30 miles</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">45 miles</Dropdown.Item>
-          <Dropdown.Item href="#/action-3">60 miles</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+      <DropdownButton
+        align="end"
+        title="RADIUS"
+        id="dropdown-menu-align-right"
+        onSelect={fetchList}
+      >
+        <Dropdown.Item eventKey="15">15 miles</Dropdown.Item>
+        <Dropdown.Item eventKey="30">30 miles</Dropdown.Item>
+        <Dropdown.Item eventKey="45">45 miles</Dropdown.Item>
+        <Dropdown.Item eventKey="60">60 miles</Dropdown.Item>
+      </DropdownButton>
       <MapContainer lat={lat} lng={lng} list={list} />
-    </div>
+    </div >
   );
 }
 
