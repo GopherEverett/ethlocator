@@ -4,6 +4,8 @@ import MapContainer from './components/MapContainer';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Axios from 'axios'
+import icon from './images/slimethanol.jpg'
+import './App.css';
 
 const api_key = process.env.REACT_APP_NREL_KEY
 
@@ -35,18 +37,23 @@ function App() {
 
   return (
     <div className="App">
+      <div id="buttonDiv">
+        <h1><span><img src={icon} className="icon" /></span>Ethlocator -- choose a search radius</h1>
 
-      <DropdownButton
-        align="end"
-        title="RADIUS"
-        id="dropdown-menu-align-right"
-        onSelect={fetchList}
-      >
-        <Dropdown.Item eventKey="15">15 miles</Dropdown.Item>
-        <Dropdown.Item eventKey="30">30 miles</Dropdown.Item>
-        <Dropdown.Item eventKey="45">45 miles</Dropdown.Item>
-        <Dropdown.Item eventKey="60">60 miles</Dropdown.Item>
-      </DropdownButton>
+        <DropdownButton
+          align="end"
+          title="SEARCH RADIUS"
+          id="dropdown-menu-align-right"
+          onSelect={fetchList}
+        >
+          <Dropdown.Item eventKey="5">5 miles</Dropdown.Item>
+          <Dropdown.Item eventKey="10">10 miles</Dropdown.Item>
+          <Dropdown.Item eventKey="15">15 miles</Dropdown.Item>
+          <Dropdown.Item eventKey="30">30 miles</Dropdown.Item>
+          <Dropdown.Item eventKey="45">45 miles</Dropdown.Item>
+          <Dropdown.Item eventKey="60">60 miles</Dropdown.Item>
+        </DropdownButton>
+      </div>
       <MapContainer lat={lat} lng={lng} list={list} />
     </div >
   );

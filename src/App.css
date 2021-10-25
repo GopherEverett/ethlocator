@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
-
 .App {
   text-align: center;
 }
@@ -10,4 +9,20 @@ h1 {
 
 h3 {
   font-family: 'Varela Round', sans-serif;
+}
+
+#buttonDiv {
+  min-width: 100%;
+  margin-bottom: 1.2rem;
+  /* text-align: center; */
+}
+
+#buttonDiv h1 {
+  font-family: 'Varela Round', sans-serif;
+  font-weight: bold;
+}
+
+.icon {
+  max-width: 10rem;
+  padding-right: 3rem;
 }
