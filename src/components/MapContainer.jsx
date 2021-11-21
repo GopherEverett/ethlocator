@@ -29,7 +29,7 @@ function MapContainer(props) {
     }
 
     return (
-        <div>
+        <div className='mapContainer'>
             {props.lat && props.lng ?
                 <Map
                     google={props.google}
@@ -48,14 +48,16 @@ function MapContainer(props) {
                         position={{lat: station.latitude, lng: station.longitude}}
                         name={station.station_name}
                         address={station.street_address}
+                        hours={station.access_days_time}
                         />
                     ))}
                     <InfoWindow
                     marker={activeMarker}
                     visible={showInfoWindow}
                     >
-                        <h1>{selectedPlace.name}</h1>
+                        <h2>{selectedPlace.name}</h2>
                         <h3>{selectedPlace.address}</h3>
+                        <h3>{`open ${selectedPlace.hours}`}</h3>
                     </InfoWindow>
                 </Map>: null
             }

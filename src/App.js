@@ -38,9 +38,10 @@ function App() {
   return (
     <div className="App">
       <div id="buttonDiv">
-        <h1><span><img src={icon} className="icon" /></span>Ethlocator -- choose a search radius</h1>
-
+        <h1>ETHLOCATOR</h1>
+        <h2>choose a search radius</h2>
         <DropdownButton
+          variant="success"
           align="end"
           title="SEARCH RADIUS"
           id="dropdown-menu-align-right"

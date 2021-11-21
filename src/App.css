@@ -1,14 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&display=swap');
+
 .App {
   text-align: center;
+  background-color: black;
 }
 
 h1 {
-  font-family: 'Varela Round', sans-serif;
+  color: mediumseagreen;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+}
+
+h2 {
+  color: mediumseagreen;
+  font-weight: 400;
 }
 
 h3 {
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Raleway', sans-serif;
 }
 
 #buttonDiv {
@@ -17,12 +26,17 @@ h3 {
   /* text-align: center; */
 }
 
-#buttonDiv h1 {
-  font-family: 'Varela Round', sans-serif;
+.mapContainer h2 {
+  font-family: 'Raleway', sans-serif;
   font-weight: bold;
+  color: black;
 }
 
 .icon {
   max-width: 10rem;
   padding-right: 3rem;
+}
+
+.dropdown {
+  padding-bottom: 8px;
 }
