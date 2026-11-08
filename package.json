@@ -3,9 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@aws-amplify/ui-react": "^6.15.7",
     "@testing-library/jest-dom": "^6.1.4",
     "@testing-library/react": "^12.1.5",
     "@testing-library/user-event": "^14.4.3",
+    "aws-amplify": "^6.22.2",
     "axios": "^1.6.7",
     "bootstrap": "^5.3.1",
     "google-maps-react-17": "^2.1.0",
@@ -20,7 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "sandbox": "ampx sandbox --outputs-out-dir src"
   },
   "eslintConfig": {
     "extends": [
@@ -39,5 +42,19 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@aws-amplify/backend": "^1.25.1",
+    "@aws-amplify/backend-cli": "^1.10.0",
+    "aws-cdk-lib": "^2.275.0",
+    "constructs": "^10.8.1",
+    "esbuild": "^0.28.2",
+    "tsx": "^4.23.15",
+    "typescript": "^5.9.3"
+  },
+  "overrides": {
+    "react-scripts": {
+      "typescript": "$typescript"
+    }
   }
 }
