@@ -6,3 +6,12 @@ On load the map centers on the user's location (if they allow location access) a
 
 To run locally you will need keys for both APIs in an `.env` file as:
 `REACT_APP_MAP_KEY` and `REACT_APP_NREL_KEY`
+## Login (AWS Amplify Auth)
+
+Signing in is required to use the map. Accounts are stored in an Amazon Cognito user pool (email + password, with an emailed confirmation code), defined in code under `amplify/` with [Amplify Gen 2](https://docs.amplify.aws/react/build-a-backend/auth/).
+
+**On Amplify Hosting** nothing extra is needed: `amplify.yml` deploys the auth backend for each branch (`npx ampx pipeline-deploy`) and writes `src/amplify_outputs.json` before the React build. The app's Amplify service role needs the `AmplifyBackendDeployFullAccess` policy.
+
+**Locally**, the app needs `src/amplify_outputs.json`. Either:
+- run your own cloud sandbox (needs AWS credentials on your machine): `npm run sandbox`, then `npm start` in another terminal; or
+- download the outputs for a deployed branch from the Amplify console (branch → Deployed backend resources → Download amplify_outputs.json) into `src/`.

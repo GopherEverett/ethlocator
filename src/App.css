@@ -63,3 +63,57 @@ h3 {
   color: #ccc;
   margin: 0.25rem 0 0;
 }
+
+/* ---- Auth ---- */
+
+/* Green brand color for Amplify's buttons and links. Amplify declares its
+   theme variables on :root, so they have to be overridden there. */
+:root,
+[data-amplify-theme] {
+  --amplify-colors-primary-80: #2e8b57;
+  --amplify-colors-primary-90: #257347;
+  --amplify-colors-primary-100: #1d5c39;
+  --amplify-colors-primary-10: #e6f6ed;
+  --amplify-colors-font-interactive: #2e8b57;
+}
+
+/* Black page behind the sign-in card. */
+[data-amplify-authenticator] {
+  min-height: 100vh;
+  background-color: black;
+}
+
+.authHeader {
+  text-align: center;
+  padding: 2rem 16px 1rem;
+}
+
+.accountBar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.5rem 16px 0;
+  color: #ccc;
+  font-size: 0.9rem;
+}
+
+.accountEmail {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.signOut {
+  background: none;
+  border: 1px solid mediumseagreen;
+  border-radius: 4px;
+  color: mediumseagreen;
+  padding: 0.15rem 0.6rem;
+}
+
+.signOut:hover,
+.signOut:focus {
+  background-color: mediumseagreen;
+  color: black;
+}
