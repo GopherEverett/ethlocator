@@ -10,7 +10,9 @@ To run locally you will need keys for both APIs in an `.env` file as:
 
 Signing in is required to use the map. Accounts are stored in an Amazon Cognito user pool (email + password, with an emailed confirmation code), defined in code under `amplify/` with [Amplify Gen 2](https://docs.amplify.aws/react/build-a-backend/auth/).
 
-**On Amplify Hosting** nothing extra is needed: `amplify.yml` deploys the auth backend for each branch (`npx ampx pipeline-deploy`) and writes `src/amplify_outputs.json` before the React build. The app's Amplify service role needs the `AmplifyBackendDeployFullAccess` policy.
+**On Amplify Hosting** nothing extra is needed: `amplify.yml` deploys the auth backend for each branch (`npx ampx pipeline-deploy`) and writes `src/amplify_outputs.json` before the React build. Two one-time settings in the Amplify console:
+- **Build image:** App settings → Build settings → Build image settings → **Amazon Linux 2023**. The build uses Node 22 (`amplify.yml` runs `nvm install 22`), which can't run on the older Amazon Linux 2 image.
+- **Service role:** the app's service role needs the `AmplifyBackendDeployFullAccess` policy.
 
 **Locally**, the app needs `src/amplify_outputs.json`. Either:
 - run your own cloud sandbox (needs AWS credentials on your machine): `npm run sandbox`, then `npm start` in another terminal; or
