@@ -10,18 +10,18 @@ const mapStyles = {
     height: '90%'
 }
 
-function MapContainer(props) {
+function MapContainer({ google, center, zoom, list, userLocation }) {
     const [showInfoWindow, setShowInfoWindow] = useState(false)
-    const [activeMarker, setActiveMarker] = useState({})
+    const [activeMarker, setActiveMarker] = useState(null)
     const [selectedPlace, setSelectedPlace] = useState({})
 
-    const onMarkerClick = (props, marker, e) => {
-        setSelectedPlace(props)
+    const onMarkerClick = (markerProps, marker) => {
+        setSelectedPlace(markerProps)
         setActiveMarker(marker)
         setShowInfoWindow(true)
     }
 
-    const onMapClick = (props) => {
+    const onMapClick = () => {
         if (showInfoWindow) {
             setShowInfoWindow(false)
             setActiveMarker(null)
@@ -30,37 +30,49 @@ function MapContainer(props) {
 
     return (
         <div className='mapContainer'>
-            {props.lat && props.lng ?
-                <Map
-                    google={props.google}
-                    onClick={onMapClick}
-                    zoom={14}
-                    style={mapStyles}
-                    initialCenter={{
-                        lat: props.lat,
-                        lng: props.lng
-                    }}
-                >
-                    {props.list.map((station, idx) => (
-                        <Marker
+            <Map
+                google={google}
+                onClick={onMapClick}
+                zoom={zoom}
+                style={mapStyles}
+                initialCenter={center}
+                center={center}
+            >
+                {userLocation && (
+                    <Marker
+                        position={userLocation}
+                        title="You are here"
+                        icon={{
+                            path: google.maps.SymbolPath.CIRCLE,
+                            scale: 8,
+                            fillColor: '#4285F4',
+                            fillOpacity: 1,
+                            strokeColor: 'white',
+                            strokeWeight: 2,
+                        }}
+                    />
+                )}
+                {list.map((station) => (
+                    <Marker
                         onClick={onMarkerClick}
-                        key={idx}
-                        position={{lat: station.latitude, lng: station.longitude}}
+                        key={station.id}
+                        position={{ lat: station.latitude, lng: station.longitude }}
                         name={station.station_name}
-                        address={station.street_address}
+                        address={`${station.street_address}, ${station.city}, ${station.state}`}
                         hours={station.access_days_time}
-                        />
-                    ))}
-                    <InfoWindow
+                    />
+                ))}
+                <InfoWindow
                     marker={activeMarker}
                     visible={showInfoWindow}
-                    >
+                >
+                    <div>
                         <h2>{selectedPlace.name}</h2>
                         <h3>{selectedPlace.address}</h3>
-                        <h3>{`open ${selectedPlace.hours}`}</h3>
-                    </InfoWindow>
-                </Map>: null
-            }
+                        {selectedPlace.hours && <h3>{`open ${selectedPlace.hours}`}</h3>}
+                    </div>
+                </InfoWindow>
+            </Map>
         </div>
     )
 }

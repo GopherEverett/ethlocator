@@ -40,3 +40,26 @@ h3 {
 .dropdown {
   padding-bottom: 8px;
 }
+.searchBar {
+  max-width: 40rem;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.radiusSelect {
+  max-width: 7.5rem;
+}
+
+.useLocation {
+  color: mediumseagreen;
+}
+
+.useLocation:hover,
+.useLocation:focus {
+  color: #5fd394;
+}
+
+.statusMessage {
+  color: #ccc;
+  margin: 0.25rem 0 0;
+}
